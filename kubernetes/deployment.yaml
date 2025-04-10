@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: java-microservices-cicd
-          image: docker.io/prashanth7993/java-microservices-cicd:latest
+          image: docker.io/prashanth7993/java-microservice-cicd:latest
           ports:
             - containerPort: 8080
