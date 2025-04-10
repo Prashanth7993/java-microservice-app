@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: java-microservices-cicd
-          image: prashanth7993/java-microservices-cicd:latest
+          image: quay.io/prashanth7993/java-microservices-cicd:latest
           ports:
             - containerPort: 8080
       imagePullSecrets:
