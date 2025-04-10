@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-microservices-cicd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: java-microservices-cicd
+  template:
+    metadata:
+      labels:
+        app: java-microservices-cicd
+    spec:
+      containers:
+        - name: java-microservices-cicd
+          image: prashanth7993/java-microservices-cicd:latest
+          ports:
+            - containerPort: 8080
