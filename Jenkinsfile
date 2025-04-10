@@ -62,6 +62,9 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        echo "Deleting existing deployment (if exists)..."
+                        kubectl delete -f kubernetes/deployment.yaml --ignore-not-found
+                        echo "Applying deployments and service yaml"
                         kubectl apply -f kubernetes/deployment.yaml
                         kubectl apply -f kubernetes/service.yaml
                     '''
