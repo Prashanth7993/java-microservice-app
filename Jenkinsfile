@@ -42,13 +42,21 @@ pipeline {
         stage('Docker Build & Push') {
             steps {
                 script {
-                    sh '''
-                        docker build -t prashanth7993/java-microservice-cicd:latest .
-                        docker push prashanth7993/java-microservice-cicd:latest
-                    '''
-                }
-            }
-        }
+                    withCredentials([usernamePassword(credentialsId: 'Docker_hub_credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh """
+	                    echo "Logging in to Docker Hub..."
+	                    docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+	                    echo "Building Docker image..."
+	                    docker build -t $DOCKER_USER/java-microservice-cicd:latest .
+
+	                    echo "Pushing Docker image..."
+	                    docker push $DOCKER_USER/java-microservice-cicd:latest
+	                """
+	 	    }
+	        }
+	    }
+	}
 
         stage('Kubernetes Deploy') {
             steps {
