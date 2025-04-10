@@ -39,6 +39,27 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
+        stage('Docker Build & Push') {
+            steps {
+                script {
+                    sh '''
+                        docker build -t prashanth7993/java-microservice-cicd:latest .
+                        docker push prashanth7993/java-microservice-cicd:latest
+                    '''
+                }
+            }
+        }
+
+        stage('Kubernetes Deploy') {
+            steps {
+                script {
+                    sh '''
+                        kubectl apply -f k8s/deployment.yaml
+                        kubectl apply -f k8s/service.yaml
+                    '''
+                }
+            }
+        }
     }
 
     post {
