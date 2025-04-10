@@ -17,3 +17,5 @@ spec:
           image: prashanth7993/java-microservices-cicd:latest
           ports:
             - containerPort: 8080
+      imagePullSecrets:
+        - name: regcred
